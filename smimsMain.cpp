@@ -9,10 +9,11 @@ int main()
 {
     srand(time(NULL));
     Info f;
-    for (int i = 0; i < 1; i++)     //loop for test
+    f.readExisting();
+    for (int i = 0; i < 3; i++)     //loop for test
     {
         f.addEntry();
     }
-    f.showList();
     f.saveList();
+    f.showList();
 }

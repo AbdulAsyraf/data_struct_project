@@ -19,6 +19,8 @@ class Info
     public:
         Info();
         ~Info();
+        void readExisting();
+        void getEntry(int, std::string, std::string);
         void addEntry();
         void saveList();
         void showList();
