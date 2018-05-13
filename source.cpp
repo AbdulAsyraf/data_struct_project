@@ -99,3 +99,31 @@ bool Linked::search(int code){
     oF.close();
     return false;
 }
+
+void Linked::updateQuant(int code, int quantity){
+    Node *pCurr = new Node;
+    pCurr = pHead;
+    while (pCurr != NULL){
+        if (pCurr->code == code){
+            pCurr->quantity = pCurr->quantity - quantity;
+            break;
+        }
+        else
+            pCurr = pCurr->link;
+    }
+}
+
+bool Linked::addQuant(int code, int quantity){
+    Node *pCurr = new Node;
+    pCurr = pHead;
+    while (pCurr != NULL){
+        if (pCurr->code == code){
+            pCurr->quantity = pCurr->quantity + quantity;
+            return true;
+        }
+        else{
+            pCurr = pCurr->link;
+        }
+    }
+    return false;
+}

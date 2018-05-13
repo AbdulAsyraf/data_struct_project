@@ -25,4 +25,6 @@ class Linked{
         void show();        //displays contents of list
         void save();        //saves list
         bool search(int);
+        void updateQuant(int, int);
+        bool addQuant(int, int);
 };
