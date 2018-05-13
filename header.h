@@ -24,4 +24,5 @@ class Linked{
         int numEle();       //returns numItem
         void show();        //displays contents of list
         void save();        //saves list
+        bool search(int);
 };

@@ -81,3 +81,21 @@ void Linked::save(){
     outFile1.close();
     outFile2.close();
 }
+
+bool Linked::search(int code){
+    Node *pCurr = new Node;
+    pCurr = pHead;
+    ofstream oF("sold.txt", ios::out | ios::app);
+
+    while (pCurr != NULL){
+        if (pCurr->code == code){
+            oF << pCurr->code << "\t";
+            return true;
+        }
+        else{
+            pCurr = pCurr->link;
+        }
+    }
+    oF.close();
+    return false;
+}

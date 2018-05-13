@@ -12,6 +12,8 @@ using namespace std;
 
 //TOY GRO CLO TLT STA MIS
 
+Linked a, b, c, d, e, f;        //global object declaration
+
 string getName(){
     string name;
     cin.ignore();
@@ -20,21 +22,23 @@ string getName(){
     return name;
 }
 
+int search(){
+    int code;
+    cout << "Please enter the item code: ";
+    cin >> code;
+    return code;
+}
+
 int getQuant(){
     int quantity;
-    cout << "Please enter the quantity of the product: ";
+    cout << "Please enter the quantity: ";
     cin >> quantity;
     return quantity;
 }
 
-int main(){
-    Linked a, b, c, d, e, f;
+void read(){
     int code, quantity;
-    bool finish = false;
-    string type, name, userIn;
-    char userChar[4];
-
-    srand(time(NULL));
+    string type, name;
 
     if (a.checkFile()){         //all objects uses same file so only one check is needed
         ifstream inFile1("stockAtt.txt");
@@ -54,10 +58,19 @@ int main(){
                 e.addNode(code, quantity, type, name);
             else if (type == "MIS")
                 f.addNode(code, quantity, type, name);
-        }
-        inFile1.close();
-        inFile2.close();
     }
+    inFile1.close();
+    inFile2.close();
+    }
+}
+
+void manager(){
+    int code, quantity;
+    bool finish = false;
+    string type, name, userIn;
+    char userChar[4];
+
+    srand(time(NULL));
 
     while(!finish){
         finish = false;
@@ -132,6 +145,114 @@ int main(){
         f.show();
     }
 
-    system("pause");
-    return 0;
+    //system("pause");
+}
+
+void cashier(){
+    char in[4];
+    string type;
+    int code, quantity;
+    bool check;
+    bool finish = false;
+    ofstream sold("sold.txt", ios::out | ios::app);
+
+    cout << "Welcome Sales Manager\n";
+    do{
+        cout << "Please enter the category (TOY GRO CLO TLT STA MIS) or q when done: ";
+        cin >> in;
+        for (int i = 0; i < 4; i++)
+            in[i] = toupper(in[i]);
+        type = string(in);
+        if (type == "TOY"){
+            code = search();
+            check = a.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "GRO"){
+            code = search();
+            check = b.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "CLO"){
+            code = search();
+            check = c.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "TLT"){
+            code = search();
+            check = d.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "STA"){
+            code = search();
+            check = e.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "MIS"){
+            code = search();
+            check = f.search(code);
+            if(check){
+                quantity = getQuant();
+                sold << quantity << "\t";
+            }
+            else{
+                cout << "Invalid code entered!\n";
+            }
+        }
+        else if (type == "Q"){
+            finish = true;
+        }
+    }while(!finish);
+
+    sold.close();
+}
+
+int main(){
+
+    int choice = 0;
+    read();
+    cout << "Welcome to SuperMarket Inventory Management System\n";
+    
+    do{
+        cout << "Who are you?\nEnter 1 for cashier or 2 for stock keeper: ";
+        cin >> choice;
+    }while(choice != 1 && choice != 2);
+    switch(choice){
+        case 1:
+            cashier();
+            break;
+        case 2:
+            manager();
+            break;
+    }
 }
