@@ -127,3 +127,25 @@ bool Linked::addQuant(int code, int quantity){
     }
     return false;
 }
+
+bool Linked::remove(int code){
+    Node *pCurr = new Node;
+    Node *pPrev = new Node;
+    pCurr = pHead;
+    while (pCurr != NULL){
+        if (pCurr->code == code && pCurr == pHead){
+            pHead = pCurr->link;
+            delete pCurr;
+            return true;
+        }
+        else if (pCurr->code == code){
+            pPrev->link = pCurr->link;
+            delete pCurr;
+            return true;
+        }
+        else{
+            pCurr = pCurr->link;
+        }
+    }
+    return false;
+}

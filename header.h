@@ -27,4 +27,5 @@ class Linked{
         bool search(int);
         void updateQuant(int, int);
         bool addQuant(int, int);
+        bool remove(int);
 };

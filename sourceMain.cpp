@@ -335,6 +335,47 @@ void managerRes(){
     display();
 }
 
+void managerRem(){
+    bool finish = false;
+    int code;
+    string wish;
+    
+    while(!finish){
+        cout << "Please enter the  code of the item to delete\n";
+        cin >> code;
+        if (a.remove(code)){
+            cout << "Success\n";
+        }
+        else if (b.remove(code)){
+            cout << "Success\n";
+        }
+        else if (c.remove(code)){
+            cout << "Success\n";
+        }
+        else if (d.remove(code)){
+            cout << "Success\n";
+        }
+        else if (e.remove(code)){
+            cout << "Success\n";
+        }
+        else if (f.remove(code)){
+            cout << "Success\n";
+        }
+        else{
+            cout << "Entry not found\n";
+        }
+        cout << "Do you wish to delete more?\n";
+        cout << "1 - Yes\n";
+        cout << "Anything else - No\n";
+        cin >> wish;
+        if (wish != "1"){
+            finish = true;
+        }
+    }
+    save();
+    display();
+}
+
 void manager(){
     int job = 0;
     cout << "Welcome Stock Keeper\nWhat will you do today?\n";
@@ -342,12 +383,14 @@ void manager(){
     cout << "2 - Restock the inventory\n";
     cout << "3 - Run End of Day inventory update\n";
     cout << "4 - Add new item\n";
+    cout << "5 - Delete an item\n";
     do{
         cin >> job;
     }while (job != 1 &&
             job != 2 &&
             job != 3 &&
-            job != 4);
+            job != 4 &&
+            job != 5);
     
     switch (job){
         case 1:
@@ -363,6 +406,10 @@ void manager(){
         case 4:
             display();
             managerAdd();
+            break;
+        case 5:
+            display();
+            managerRem();
             break;
     }
 }
